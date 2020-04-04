@@ -1,0 +1,16 @@
+A linear list is given. Eliminate from the list all elements from N to N steps, N-given.
+
+(defun removen(L n m)
+    (COND 
+     ((null l) nil) 		;we stop when we reach the empty list	
+     ((equal n m) (removeN (CDR L) 1 m))	;we reached the n'th elements which we will remove	
+    (t (cons (car l)( removeN (CDR L) (+ 1 n) m)))  ;we continue looking for the n'th element
+    )
+    )
+    
+(defun startRemove(l m)
+    (cond 
+    ( t (removen l 1 m))
+    ))
+    
+(print (startRemove '(1 2 3 4 5 6 7 8 9 ) 2))

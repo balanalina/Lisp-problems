@@ -1,0 +1,27 @@
+Write a function that deletes from a linear list of all occurrences of the maximum element.
+
+;store the maximum in m
+(defun maxim(l m)
+    (COND
+         ((null l) m)
+         ((or (null m) (> (CAR l) m))(maxim (CDR l) (CAR l)))  ;we found a new maxim
+         (t (maxim (CDR l) m))     
+     )
+    )
+    
+(defun removeMax(L m)
+    (COND 
+     ((null l) nil)
+     ((equal (CAR l) m) (removeMax (CDR L) m))  ;remove the maximum element
+    (t (cons (car l)( removeMax (CDR L) m)))
+    )
+    )
+    
+
+(defun start(l)
+    (COND 
+         ((null l) nil)
+         (t (print (removeMax l (maxim l nil))))
+     )
+    )
+(start '(5 125 7 124 125 8 125))

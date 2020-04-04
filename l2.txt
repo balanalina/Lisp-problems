@@ -1,0 +1,23 @@
+For a given tree of type (2) return the path from the root node to a certain given node X.
+;store the maximum in m
+(defun path (tree node)
+    (COND
+     ((null tree) nil)
+     ((atom (CAR tree))(CONS (CAR tree) (path (CDR tree) node)))
+     ((and(listp (CAR tree))(isIn (CAR tree) node)) ( path (CAR tree) node ) )
+     ((listp(CAR tree)) (path(CDR tree)node))
+     )
+    )
+
+(defun isIn(subTree node)
+     (COND 
+         ((null subTree) nil)
+         ((and(atom(CAR subtree))(equal (CAR subTree) node)) t)
+         ((atom(CAR subtree)) (isIn(CDR subTree) node))
+         ((and(listp (CAR subTRee))(isIn (CAR subTree) node)) t)
+          ((listp (CAR subTRee)) (isIn(CDR subTree) node))
+      )
+    )
+(print(isIn '(1 2 3 4 5) 4))
+(print(path '(1 (2) (3 (4) (5))(7 120 (8))) 8))
+(print (path '(1(2(3))(4(5 6)7)(8(9)(10)))10))

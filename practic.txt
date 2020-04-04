@@ -1,0 +1,34 @@
+f '(A B A B A C A) --> ((A 4) (B 2) (C 1)) 
+f '(A A A A A)     --> ((A 5)) 
+f '(A B C D E F)   --> ((A 1) (B 1) (C 1) (D 1) (E 1) (F 1))
+f '(A B C B A)     --> ((A 2) (B 2) (C 1)) 
+Write a function that transform the given list into a list containing two elements lists having the letter and its number of occurence in the original list.
+
+(DEFUN occurrence(l el cont)
+       (COND
+        ((NULL l) cont)
+        ((eq (CAR l) el) (occurrence (CDR l) el (+ cont 1)))
+        (t (occurrence (CDR l) el cont))
+        )
+       )
+
+(DEFUN removeElem(l el)
+       (COND
+        ((NULL l) nil)
+        ((eq (CAR l) el) (removeElem (CDR l) el))
+        (t (cons (CAR l) (removeElem (CDR l) el)))
+        )
+       )
+
+(DEFUN f(l)
+       (COND
+        ((NULL l) nil)
+        (t (setq c (occurrence l (CAR l) 0)) (setq el (CAR l)) (setq l (removeElem l el)) (cons (list el c) (f  l)))
+        )
+       )
+
+
+(print (f '(A B A B A C A)))
+(print (f '(A A A A A)))
+(print (f '(A B C D E F)))
+(print (f '(A B C B A)))

@@ -1,0 +1,28 @@
+Write a function to test if a linear list of integer numbers has a "valley" aspect (a list has a valley aspect if the items decrease to a certain point and then increase. Eg. 10 8 6 17 19 20). A list must have at least 3 elements to fullfill this condition.
+
+;bottom ( 1 - the sequence is descending) ( 0 - the sequence is ascending)
+(defun valley(l bottom)
+    (COND
+         ((= (list-length l) 1) bottom)                                    ;we reached the end of the list and return the bottom variable
+         ((and (equal bottom 1) (> (CAR l) (CADR l))) (valley (CDR l)  1)) ;the sequence is descending and we keep going
+         ((and (equal bottom 1) (< (CAR l) (CADR l))) (valley (CDR l) 0))  ;we reached the bottom, we continue looking for the net sequence to be ascending
+         ((and (eql bottom 0) (< (CAR l) (CADR l))) (valley (CDR l) 0))    ;the sequence is ascending and we keep going
+         ((and (eq bottom 0) (> (CAR l) (CADR l))) 1) 			   ;the sequence changes from ascending to descending and so we will return 1 (as false), our list is not a velly 
+     )
+    )
+(defun startValley(l)
+    (COND 
+         ((null l) 1)						;treat empty list
+         ((and (< (list-length l) 3) (< (CAR l) (CADR l))) 1)   ;a list must have at lest 3 elements to be a valley
+         (t (valley l 1))
+     )
+    )
+
+(defun printStartValley(l)
+    (COND
+      ((equal (startValley l) 1) (print "The list does not have a valley aspect!") )
+     (t (print "The list has a valley aspect!"))
+     )
+    )
+
+(printStartValley '(9 8 7 5 6 9))

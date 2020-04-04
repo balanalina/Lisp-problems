@@ -1,0 +1,11 @@
+Build a function that returns the minimum numeric atom from a list, at any level.
+
+(defun startMin(l)
+    (COND 
+         ((numberp l) l)
+         (t (apply #'min(mapcar #'startMin l))
+     )
+    )
+    )
+(print (startMin '(5 7 8)))
+ (print (startMin '(3 (5 7 8) 9 8 7 5 -4)))
